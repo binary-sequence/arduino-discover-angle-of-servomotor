@@ -9,8 +9,8 @@
 
 Servo myservo;
 
-int min_angle_pos = 0; // To store the minimun angle position of the servomotor.
-int max_angle_pos = 180; // To store the maximun angle position of the servomotor.
+int min_angular_pos = 0; // To store the minimum angle position of the servomotor.
+int max_angular_pos = 180; // To store the maximum angle position of the servomotor.
 
 void setup() {
   myservo.attach(SERVOMOTOR_PIN); // Enable pin and servo
