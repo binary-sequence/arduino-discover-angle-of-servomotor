@@ -23,7 +23,7 @@ void setup() {
   Serial.println(SERVOMOTOR_PIN);
 
   Serial.println("  Set servo to 90 degrees.");
-  myservo.write(90); // Set servo to 90° degrees.
+  myservo.write(90); // Set servo to 90 degrees.
   delay(500);
 
   Serial.println("setup ends");
