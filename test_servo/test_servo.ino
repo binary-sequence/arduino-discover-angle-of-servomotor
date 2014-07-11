@@ -13,7 +13,21 @@ int min_angular_pos = 0; // To store the minimum angle position of the servomoto
 int max_angular_pos = 180; // To store the maximum angle position of the servomotor.
 
 void setup() {
+  Serial.begin(SERIAL_BPS); // Serial port communication at 9600 bps (baudios).
+  Serial.println("setup begins");
+  Serial.print("  Serial communication port opened at ");
+  Serial.println(SERIAL_BPS);
+
   myservo.attach(SERVOMOTOR_PIN); // Enable pin and servo
+  Serial.print("  Servo attached to pin ");
+  Serial.println(SERVOMOTOR_PIN);
+
+  Serial.println("  Set servo to 90 degrees.");
+  myservo.write(90); // Set servo to 90° degrees.
+  delay(500);
+
+  Serial.println("setup ends");
+  Serial.println("");
 }
 
 void loop() {}
