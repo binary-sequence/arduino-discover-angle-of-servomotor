@@ -25,10 +25,11 @@ void setup() {
 
   Serial.println("  Set servo to 90 degrees.");
   myservo.write(90); // Set servo to 90 degrees.
-  delay(500);
+  delay(2000);
 
   Serial.println();
   Serial.println("  Test begins");
+  delay(1000);
   myservo.write(0);
   delay(500);
   user_input = ask_user_if_servo_moved(0);
