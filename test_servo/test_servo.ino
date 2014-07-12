@@ -36,7 +36,12 @@ void setup() {
   if (user_input == 'y' || user_input == 'Y') {
     Serial.println("    min_angular_pos found: 0");
   } else {
-    Serial.println("    look_for_min_angular_pos...");
+    if (get_min_angular_pos(&min_angular_pos) == true) {
+      Serial.print("    min_angular_pos found: ");
+      Serial.println(min_angular_pos);
+    } else {
+      Serial.println("    Warning: min_angular_pos not found.");
+    }
   }
   Serial.println("  Test ends");
 
@@ -54,6 +59,29 @@ int ask_user_if_servo_moved(int position) {
   Serial.println("? [y/N]");
 
   return read_user_input();
+}
+
+
+bool get_min_angular_pos(int *min_angular_pos) {
+  bool no_errors = true;
+  int user_input;
+  int left_endpoint = 0;
+  int right_endpoint = 90;
+
+  while(right_endpoint - left_endpoint != 1) {
+    *min_angular_pos = left_endpoint + (right_endpoint - left_endpoint) / 2;
+
+    myservo.write(*min_angular_pos);
+    delay(500);
+    user_input = ask_user_if_servo_moved(*min_angular_pos);
+    if (user_input == 'y' || user_input == 'Y') {
+      right_endpoint = *min_angular_pos;
+    } else {
+      left_endpoint = *min_angular_pos;
+    }
+  }
+
+  return no_errors;
 }
 
 
