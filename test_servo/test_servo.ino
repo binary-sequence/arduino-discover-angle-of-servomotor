@@ -66,17 +66,19 @@ bool get_min_angular_pos(int *min_angular_pos) {
   int user_input;
   int left_endpoint = 0;
   int right_endpoint = 90;
+  int test_point;
 
   while(right_endpoint - left_endpoint != 1) {
-    *min_angular_pos = left_endpoint + (right_endpoint - left_endpoint) / 2;
+    test_point = left_endpoint + (right_endpoint - left_endpoint) / 2;
 
-    myservo.write(*min_angular_pos);
+    myservo.write(test_point);
     delay(500);
-    user_input = ask_user_if_servo_moved(*min_angular_pos);
+    user_input = ask_user_if_servo_moved(test_point);
     if (user_input == 'y' || user_input == 'Y') {
-      right_endpoint = *min_angular_pos;
+      right_endpoint = test_point;
+      *min_angular_pos = test_point;
     } else {
-      left_endpoint = *min_angular_pos;
+      left_endpoint = test_point;
     }
   }
 
