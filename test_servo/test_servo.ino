@@ -42,6 +42,9 @@ void setup() {
     } else {
       Serial.println("    Warning: min_angular_pos not found.");
     }
+    max_angular_pos = get_max_angular_pos();
+    Serial.print("    max_angular_pos found: ");
+    Serial.println(max_angular_pos);
   }
   Serial.println("  Test ends");
 
@@ -59,6 +62,31 @@ int ask_user_if_servo_moved(int position) {
   Serial.println("? [y/N]");
 
   return read_user_input();
+}
+
+
+int get_max_angular_pos() {
+  int user_input;
+  int left_endpoint = 90;
+  int right_endpoint = 180;
+  int test_point;
+  int max_angular_pos;
+
+  while(right_endpoint - left_endpoint != 1) {
+    test_point = left_endpoint + (right_endpoint - left_endpoint) / 2;
+
+    myservo.write(test_point);
+    delay(500);
+    user_input = ask_user_if_servo_moved(test_point);
+    if (user_input == 'y' || user_input == 'Y') {
+      left_endpoint = test_point;
+      max_angular_pos = test_point;
+    } else {
+      right_endpoint = test_point;
+    }
+  }
+
+  return max_angular_pos;
 }
 
 
