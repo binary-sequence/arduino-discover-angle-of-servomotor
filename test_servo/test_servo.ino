@@ -39,6 +39,14 @@ void setup() {
     min_angular_pos = get_min_angular_pos();
     Serial.print("    min_angular_pos found: ");
     Serial.println(min_angular_pos);
+  }
+  delay(1000);
+  myservo.write(180);
+  delay(500);
+  user_input = ask_user_if_servo_moved(180);
+  if (user_input == 'y' || user_input == 'Y') {
+    Serial.println("    max_angular_pos found: 180");
+  } else {
     max_angular_pos = get_max_angular_pos();
     Serial.print("    max_angular_pos found: ");
     Serial.println(max_angular_pos);
