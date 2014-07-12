@@ -13,6 +13,8 @@ int min_angular_pos = 0; // To store the minimum angle position of the servomoto
 int max_angular_pos = 180; // To store the maximum angle position of the servomotor.
 
 void setup() {
+  int user_input;
+
   Serial.begin(SERIAL_BPS); // Serial port communication at 9600 bps (baudios).
   Serial.println("setup begins");
   Serial.print("  Serial communication port opened at ");
@@ -26,8 +28,17 @@ void setup() {
   myservo.write(90); // Set servo to 90 degrees.
   delay(500);
 
-  Serial.print("read: ");
-  Serial.println(read_user_input());
+  Serial.println();
+  Serial.println("  Test begins");
+  myservo.write(0);
+  delay(500);
+  user_input = ask_user_if_servo_moved(0);
+  if (user_input == 'y' || user_input == 'Y') {
+    Serial.println("    min_angular_pos found: 0");
+  } else {
+    Serial.println("    look_for_min_angular_pos...");
+  }
+  Serial.println("  Test ends");
 
   Serial.println("setup ends");
   Serial.println("");
@@ -41,4 +52,13 @@ int read_user_input() {
   while(Serial.available() == 0); // Wait for user input.
 
   return Serial.read();
+}
+
+
+int ask_user_if_servo_moved(int position) {
+  Serial.print("    Did the servomotor move to ");
+  Serial.print(position);
+  Serial.println("? [y/N]");
+
+  return read_user_input();
 }
