@@ -9,4 +9,8 @@ Using arduino, if you tell a servomotor to move to a position which it cannot ta
 
 Normally, servomotors loose movement capacity by the sides of the angle.
 
-This program help to discover the real angle that a servomotor can do.
+This program help to discover the real angle that a servomotor can do (angular positions interval).
+
+
+Output example with **Arduino IDE serial monitor**
+![output example](img/output_example.png)
