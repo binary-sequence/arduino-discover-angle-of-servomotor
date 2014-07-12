@@ -48,17 +48,17 @@ void setup() {
 void loop() {}
 
 
-int read_user_input() {
-  while(Serial.available() == 0); // Wait for user input.
-
-  return Serial.read();
-}
-
-
 int ask_user_if_servo_moved(int position) {
   Serial.print("    Did the servomotor move to ");
   Serial.print(position);
   Serial.println("? [y/N]");
 
   return read_user_input();
+}
+
+
+int read_user_input() {
+  while(Serial.available() == 0); // Wait for user input.
+
+  return Serial.read();
 }
