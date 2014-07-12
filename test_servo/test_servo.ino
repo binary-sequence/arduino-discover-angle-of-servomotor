@@ -48,6 +48,16 @@ void setup() {
   }
   Serial.println("  Test ends");
 
+  Serial.println();
+  Serial.print("  Interval: [");
+  Serial.print(min_angular_pos);
+  Serial.print(",");
+  Serial.print(max_angular_pos);
+  Serial.println("]");
+  Serial.print("  Total: ");
+  Serial.print(max_angular_pos - min_angular_pos);
+  Serial.println(" degrees");
+
   Serial.println("setup ends");
   Serial.println("");
 }
