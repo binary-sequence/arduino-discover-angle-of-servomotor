@@ -26,8 +26,19 @@ void setup() {
   myservo.write(90); // Set servo to 90 degrees.
   delay(500);
 
+  Serial.print("read: ");
+  Serial.println(read_user_input());
+
   Serial.println("setup ends");
   Serial.println("");
 }
 
+
 void loop() {}
+
+
+int read_user_input() {
+  while(Serial.available() == 0); // Wait for user input.
+
+  return Serial.read();
+}
