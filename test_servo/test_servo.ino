@@ -36,12 +36,9 @@ void setup() {
   if (user_input == 'y' || user_input == 'Y') {
     Serial.println("    min_angular_pos found: 0");
   } else {
-    if (get_min_angular_pos(&min_angular_pos) == true) {
-      Serial.print("    min_angular_pos found: ");
-      Serial.println(min_angular_pos);
-    } else {
-      Serial.println("    Warning: min_angular_pos not found.");
-    }
+    min_angular_pos = get_min_angular_pos();
+    Serial.print("    min_angular_pos found: ");
+    Serial.println(min_angular_pos);
     max_angular_pos = get_max_angular_pos();
     Serial.print("    max_angular_pos found: ");
     Serial.println(max_angular_pos);
@@ -75,7 +72,7 @@ int ask_user_if_servo_moved(int position) {
 }
 
 
-int get_max_angular_pos() {
+int get_max_angular_pos(void) {
   int user_input;
   int left_endpoint = 90;
   int right_endpoint = 180;
@@ -100,12 +97,12 @@ int get_max_angular_pos() {
 }
 
 
-bool get_min_angular_pos(int *min_angular_pos) {
-  bool no_errors = true;
+int get_min_angular_pos(void) {
   int user_input;
   int left_endpoint = 0;
   int right_endpoint = 90;
   int test_point;
+  int min_angular_pos;
 
   while(right_endpoint - left_endpoint != 1) {
     test_point = left_endpoint + (right_endpoint - left_endpoint) / 2;
@@ -115,13 +112,13 @@ bool get_min_angular_pos(int *min_angular_pos) {
     user_input = ask_user_if_servo_moved(test_point);
     if (user_input == 'y' || user_input == 'Y') {
       right_endpoint = test_point;
-      *min_angular_pos = test_point;
+      min_angular_pos = test_point;
     } else {
       left_endpoint = test_point;
     }
   }
 
-  return no_errors;
+  return min_angular_pos;
 }
 
 
